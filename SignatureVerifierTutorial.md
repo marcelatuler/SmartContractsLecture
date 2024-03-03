@@ -1,3 +1,20 @@
+#### Tutorial Class: Exploring Smart Contracts with Remix IDE
+
+#### Class Objective:
+Students will learn how to create, compile, and deploy a Solidity smart contract using the Remix IDE. 
+
+Tools Needed:
+- Web browser with access to [Remix IDE](https://remix.ethereum.org/).
+
+**Setting Up the Development Environment**
+
+1. Introduction to Remix IDE:
+   - Navigate to Remix IDE in your web browser
+   - Overview of the Remix IDE interface (File explorers, code editor, compile tab, deploy & run tab)
+
+2. Creating a New File: Create a new file in Remix with the `SignatureVerifier.sol` extension for Solidity.
+
+
 #### Signature Verifier Tutorial
 
 The VerifySig contract is designed to ensure the integrity and authorship of messages and tokens within the Ethereum blockchain. It serves as a crucial component in establishing trust and security in decentralized applications, particularly when dealing with oracles and ensuring reliable sources of information.
