@@ -35,7 +35,7 @@ When this function is called, it emits an event `TokenCreated` with the sender's
 
 Let's break down the TokenCreated event in the TokenGenerator contract:
 
-```
+```solidity
 event TokenCreated(address indexed author, bytes32 indexed payloadHash, bytes signature);
 ```
 
@@ -48,12 +48,13 @@ Let's break down the createToken function. This function is designed to be calle
 
 Here's the function signature:
 
-```
+```solidity
 function createToken(string memory payload, bytes memory signature) public {
     bytes32 payloadHash = keccak256(abi.encodePacked(payload));
     emit TokenCreated(msg.sender, payloadHash, signature);
 }
 ```
+
 - `function createToken`: This is the declaration of a function named createToken. It's the part of the contract that will be executed when someone calls it. This function allows users to create a new token by providing a payload and a signature.
 
 Parameters:
