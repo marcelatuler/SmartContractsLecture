@@ -107,6 +107,9 @@ Defines `recover`, a function that takes the Ethereum-specific message hash and 
 ```
 
 Inside `recover`, it first splits the signature into `v`, `r`, and `s` using `split`, then uses `ecrecover` to get the address that created the signature.
+- `uint8 v`: The recovery byte.
+- `bytes32 r`: The first 32 bytes of the signature.
+- `bytes32 s`: The second 32 bytes of the signature.
 
 ```solidity
     function split(bytes memory _sig) internal pure
