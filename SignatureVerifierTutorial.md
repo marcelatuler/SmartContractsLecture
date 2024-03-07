@@ -197,8 +197,8 @@ Here's a step-by-step guide on how you can interact with the `VerifySig` contrac
 ### Step 1: Deploy the Contract
 
 1. **Compile the Contract**: In Remix, open the "Solidity Compiler" tab and click "Compile VerifySig.sol" to compile your contract.
-2. **Deploy the Contract**: Switch to the "Deploy & Run Transactions" tab. Ensure that "Injected Web3" or "JavaScript VM" is selected as the environment. Click "Deploy" to deploy your contract onto the blockchain or the JavaScript VM.
-
+2. **Deploy the Contract**: Switch to the "Deploy & Run Transactions" tab. Ensure that "Remix VM" is selected as the environment. Click "Deploy" to deploy your contract onto the blockchain.
+   
 ### Step 2: Add a Member
 
 1. **Add Member Function**: After deploying, you'll see the contract under "Deployed Contracts". Find the `addMember` function input box.
@@ -208,7 +208,7 @@ Here's a step-by-step guide on how you can interact with the `VerifySig` contrac
 ### Step 3: Sign a Message
 
 1. **Enter Your Message**: In the `getMessageHash`,enter your message as a string, then call the function.
-2. **Use Remix's Sign Message Tool**: In Remix, there's a feature to sign messages. Go to the account address at the top right, click on the ellipsis (...), and select "Sign Message".
+2. **Use Remix's Sign Message Tool**: In Remix, there's a feature to sign messages. Go to the account address at the top left, click on the ellipsis (...), and select "Sign Message".
 4. **Enter Your MessageHash**: In the popup, enter the `MessageHash` that was retuned by the call, e.g 0: bytes32: 0x...
 5. **Sign**: Click "Sign" to sign the message. Remix will generate a signature.
 
