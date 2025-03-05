@@ -221,6 +221,6 @@ If the caller does not have the DEFAULT_ADMIN_ROLE, the transaction is reverted 
 Used by **revoke** functions to ensure only authorized entities can remove permissions.
 
 
-#### Congratulations! You have now completed writing the HealthData contract line by line
+#### Congratulations! You have now completed writing the HealthData contract line by line.
 
 
