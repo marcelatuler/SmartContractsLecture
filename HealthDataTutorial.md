@@ -343,9 +343,6 @@ When documenting a smart contract (or any piece of code), **function tables** ca
    - Briefly describe what the function does and why it’s important.  
    - If relevant, mention the `require` conditions.
 
-In an **exam** scenario, your function table should be concise but clear, enabling someone who has never seen the contract before to understand its functions at a glance.
-
----
 
 ## Complete Function Table: HealthData Contract
 
@@ -363,17 +360,13 @@ Below is a table summarizing each external/public function in the **HealthData**
 | **getBloodPressure**     | Nurse with permission             | `address patient`, `address nurse`                                         | `string memory` (bloodPressure) | Used by a nurse to read `bloodPressure` data if the nurse has been granted permission in `nursePermissions[patient][nurse]`.                                                                               |
 | **getAllPatientData**    | Doctor with permission            | `address patient`, `address doctor`                                        | `(string memory, string memory)` | Returns both `bloodPressure` and `otherExams` if the doctor has permission in `doctorPermissions[patient][doctor]`.                                                                                        |
 
----
 
 ### Notes on Internal Functions
 
 - **_RevokeControl**: An internal function used by `revokeNursePermission` and `revokeDoctorPermission`. It checks if the caller is an admin or a patient. Because it’s `internal`, you typically **would not** list it in the table for external documentation. However, in an advanced technical document or developer-facing reference, you might include it separately for completeness.
 
----
 
-#### How to Use This Table in an Exam
-
-When asked to provide a function table:
+#### When asked to provide a function table:
 
 1. **Identify** every function you need to document (usually `public` or `external`).
 2. **Fill out** the columns (Function, Sender, Inputs, Outputs, Explanation) in a concise manner.
