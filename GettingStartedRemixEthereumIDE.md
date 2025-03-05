@@ -33,14 +33,14 @@ Start Typing Solidity Code:
 **Step 6: Deploying Your Contract**
 1. Open the Deploy Tab: Click on the 'Deploy & run transactions' tab next to the 'Solidity compiler' tab.
 
-2. Choose an Environment: Select the "JavaScript VM" from the "Environment" dropdown menu for testing purposes.
+2. Choose an Environment: Select the "Remix VM (Cancun)" from the "Environment" dropdown menu for testing purposes.
 
 3. Deploy the Contract: Click the "Deploy" button. Your contract is now deployed on the simulated blockchain provided by Remix.
 
 **Step 7: Interacting with Your Contract**
 1. Use Deployed Contracts: After deployment, your contract will appear under "Deployed Contracts".
    
-2. Execute Contract Functions: Interact with your contract's functions. For example, create a token or add a member to the list.
+2. Execute Contract Functions: Interact with your contract's functions. For example, store a value or retrieve a value.
 
 **Step 8: Understanding Transactions**
 1. View Transactions: Every time you interact with your contract, a transaction is created. You can examine these in the transaction logs.
