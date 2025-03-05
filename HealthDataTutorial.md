@@ -303,8 +303,6 @@ Your **HealthData** contract is designed to be flexible and can be adapted to a 
 - **Telemedicine**: Grant remote healthcare providers controlled access to patient records during virtual consultations.
 - **Research and Clinical Trials**: Allow authorized researchers to view anonymized patient data for studies, ensuring privacy and compliance.
 
----
-
 ### Conclusion
 
 By following these steps, you can seamlessly:
@@ -316,13 +314,11 @@ This workflow demonstrates how **role-based access control** can secure critical
 
 ---
 
-## Creating a Function Table for HealthData
+### Creating a Function Table for HealthData
 
 When documenting a smart contract (or any piece of code), **function tables** can help readers and exam evaluators quickly understand each function’s purpose, who can call it, what inputs it takes, and what outputs (if any) it returns. Below is a guide on how to fill in such a table, followed by a complete example for the **HealthData** contract.
 
----
-
-### How to Fill the Function Table
+#### How to Fill the Function Table
 
 1. **Function Name**:  
    - List the exact name of the function in your contract.
@@ -343,8 +339,7 @@ When documenting a smart contract (or any piece of code), **function tables** ca
    - Briefly describe what the function does and why it’s important.  
    - If relevant, mention the `require` conditions.
 
-
-## Complete Function Table: HealthData Contract
+#### Complete Function Table: HealthData Contract
 
 Below is a table summarizing each external/public function in the **HealthData** contract. Internal or private functions (like `_RevokeControl`) typically don’t appear in this table because they are not meant to be called externally.
 
@@ -361,7 +356,7 @@ Below is a table summarizing each external/public function in the **HealthData**
 | **getAllPatientData**    | Doctor with permission            | `address patient`, `address doctor`                                        | `(string memory, string memory)` | Returns both `bloodPressure` and `otherExams` if the doctor has permission in `doctorPermissions[patient][doctor]`.                                                                                        |
 
 
-### Notes on Internal Functions
+#### Notes on Internal Functions
 
 - **_RevokeControl**: An internal function used by `revokeNursePermission` and `revokeDoctorPermission`. It checks if the caller is an admin or a patient. Because it’s `internal`, you typically **would not** list it in the table for external documentation. However, in an advanced technical document or developer-facing reference, you might include it separately for completeness.
 
