@@ -314,3 +314,71 @@ By following these steps, you can seamlessly:
 
 This workflow demonstrates how **role-based access control** can secure critical information in a healthcare context. Experiment with additional features or integrations to match your specific use cases, and enjoy the benefits of secure, transparent data management on the blockchain!
 
+---
+
+## Creating a Function Table for HealthData
+
+When documenting a smart contract (or any piece of code), **function tables** can help readers and exam evaluators quickly understand each function’s purpose, who can call it, what inputs it takes, and what outputs (if any) it returns. Below is a guide on how to fill in such a table, followed by a complete example for the **HealthData** contract.
+
+---
+
+### How to Fill the Function Table
+
+1. **Function Name**:  
+   - List the exact name of the function in your contract.
+
+2. **Who Can Call (Sender)**:  
+   - Identify which user/role is allowed to invoke the function successfully (e.g., Admin, Nurse, Doctor, Patient).  
+   - Include any additional conditions (e.g., “must have `DEFAULT_ADMIN_ROLE`”).
+
+3. **Inputs**:  
+   - Specify the parameters the function requires.  
+   - Note the data types (e.g., `address patient`, `string memory bloodPressure`).
+
+4. **Outputs**:  
+   - Indicate whether the function returns any values.  
+   - If there are no return values, you can write “None” or “Void.”
+
+5. **Explanation**:  
+   - Briefly describe what the function does and why it’s important.  
+   - If relevant, mention the `require` conditions.
+
+In an **exam** scenario, your function table should be concise but clear, enabling someone who has never seen the contract before to understand its functions at a glance.
+
+---
+
+## Complete Function Table: HealthData Contract
+
+Below is a table summarizing each external/public function in the **HealthData** contract. Internal or private functions (like `_RevokeControl`) typically don’t appear in this table because they are not meant to be called externally.
+
+| **Function**             | **Who Can Call (Sender)**        | **Inputs**                                                                 | **Outputs**                     | **Explanation**                                                                                                                                                                                            |
+|--------------------------|-----------------------------------|----------------------------------------------------------------------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **addNurse**             | Admin only (`DEFAULT_ADMIN_ROLE`) | `address nurse`                                                            | None                            | Grants the `NURSE_ROLE` to the given `nurse` address. If the caller does not have the admin role, the function reverts with a `require`.                                                                  |
+| **addDoctor**            | Admin only (`DEFAULT_ADMIN_ROLE`) | `address doctor`                                                           | None                            | Grants the `DOCTOR_ROLE` to the given `doctor` address. Similar permissions check applies as in `addNurse`.                                                                                               |
+| **setPatientData**       | Admin only (`DEFAULT_ADMIN_ROLE`) | `address patient`, `string memory bloodPressure`, `string memory otherExams` | None                            | Allows the admin to set (or update) a patient’s data. Also grants the patient the `PATIENT_ROLE`. If caller is not admin, it reverts.                                                                     |
+| **grantNursePermission** | Admin only (`DEFAULT_ADMIN_ROLE`) | `address patient`, `address nurse`                                         | None                            | Lets an admin grant a nurse permission to access the patient’s `bloodPressure`. Requires that `nurse` already has the `NURSE_ROLE`.                                                                       |
+| **revokeNursePermission**| Admin or Patient                  | `address patient`, `address nurse`                                         | None                            | Allows an admin **or** the patient to revoke a nurse’s permission. Checks if caller is allowed to revoke via the internal `_RevokeControl` function and if `nurse` is actually a nurse.                   |
+| **grantDoctorPermission**| Admin only (`DEFAULT_ADMIN_ROLE`) | `address patient`, `address doctor`                                        | None                            | Lets an admin give a doctor access to both `bloodPressure` and `otherExams` for a patient. Requires that the `doctor` has the `DOCTOR_ROLE`.                                                              |
+| **revokeDoctorPermission**| Admin or Patient                 | `address patient`, `address doctor`                                        | None                            | Allows an admin **or** the patient to revoke a doctor’s access to all patient data. Uses `_RevokeControl` internally to ensure the caller is either admin or patient.                                      |
+| **getBloodPressure**     | Nurse with permission             | `address patient`, `address nurse`                                         | `string memory` (bloodPressure) | Used by a nurse to read `bloodPressure` data if the nurse has been granted permission in `nursePermissions[patient][nurse]`.                                                                               |
+| **getAllPatientData**    | Doctor with permission            | `address patient`, `address doctor`                                        | `(string memory, string memory)` | Returns both `bloodPressure` and `otherExams` if the doctor has permission in `doctorPermissions[patient][doctor]`.                                                                                        |
+
+---
+
+### Notes on Internal Functions
+
+- **_RevokeControl**: An internal function used by `revokeNursePermission` and `revokeDoctorPermission`. It checks if the caller is an admin or a patient. Because it’s `internal`, you typically **would not** list it in the table for external documentation. However, in an advanced technical document or developer-facing reference, you might include it separately for completeness.
+
+---
+
+#### How to Use This Table in an Exam
+
+When asked to provide a function table:
+
+1. **Identify** every function you need to document (usually `public` or `external`).
+2. **Fill out** the columns (Function, Sender, Inputs, Outputs, Explanation) in a concise manner.
+3. **Ensure consistency** with your contract:
+   - Verify role requirements match your `require` statements.
+   - Double-check input and output data types.
+   - Confirm that the explanation matches the function’s logic.
+
