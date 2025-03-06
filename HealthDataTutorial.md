@@ -223,73 +223,100 @@ Used by **revoke** functions to ensure only authorized entities can remove permi
 
 #### Congratulations! You have now completed writing the HealthData contract line by line.
 
-## HealthData: After Writing the Contract
+### HealthData: After Writing the Contract
+ 
+Now that you have completed writing your HealthData contract, the next steps involve compiling, deploying, and interacting with your new smart contract in Remix IDE. This guide will walk you through each step, from compilation to running sample transactions.
+ 
+#### Compiling the Contract
+1. In Remix, select the Solidity Compiler tab on the left sidebar.
+2. From the Compiler dropdown, choose a compatible Solidity version (for example, v0.8.0 if available).
+3. Click Compile **HealthData.sol**.
+4. If the compilation is successful, you will see a green check mark indicating no errors.
+5. Deploying the Contract
+6. Go to the Deploy & Run Transactions tab in Remix.
+7. In the Environment dropdown, select Remix VM (Cancun) or another suitable test environment.
+8. Make sure the Account dropdown is set to the address you want as the admin (the deployer).
+9. Click the Deploy button.
+10. After deployment, your contract will appear under Deployed Contracts in Remix.
 
-Now that you have completed writing your **HealthData** contract, the next steps involve compiling, deploying, and interacting with your new smart contract in **Remix IDE**. This guide will walk you through each step, from compilation to running sample transactions.
-
-### Compiling the Contract
-
-1. In **Remix**, select the **Solidity Compiler** tab on the left sidebar.
-2. From the **Compiler** dropdown, choose a compatible Solidity version (for example, `v0.8.0` if available).
-3. Click **Compile HealthData.sol**.  
-   - If the compilation is successful, you will see a green check mark indicating no errors.
-
-### Deploying the Contract
-
-1. Go to the **Deploy & Run Transactions** tab in Remix.
-2. In the **Environment** dropdown, select **Remix VM (Cancun)** or another suitable test environment.
-3. Make sure the **Account** dropdown is set to the address you want as the **admin** (the deployer).
-4. Click the **Deploy** button.
-5. After deployment, your contract will appear under **Deployed Contracts** in Remix.
-
-> **Tip**: Remix automatically selects the account used for transactions. If you switch to another address to act as a nurse or doctor, remember to switch back to the admin account for admin-only functions.
-
+ 
 ### Interacting with the Contract
+ 
+Once your contract is deployed, expand the Deployed Contracts section to reveal its functions. Here are some common interactions:
+ 
+1. Remix provides several pre-generated accounts with addresses and balances. You can find these in the Account dropdown in the Deploy & Run Transactions tab.
+2. To use these accounts for different roles (admin, nurse, doctor, patient):
+- Select the desired accounts from the Account dropdown.
+- Copy the addresses of the selected accounts and save them in a note app, specifying the address and role. (like the example below).
+``` Markdown
+    Admin: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+    Doctor1: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
+    Nurse1: 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
+    Patient: 0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB
+```
+- Use these addresses in your contract functions to assign roles or interact with the contract.
 
-Once your contract is deployed, expand the **Deployed Contracts** section to reveal its functions. Here are some common interactions:
-
-#### 1. Add Nurses and Doctors
-1. Select the **admin** account (the one that deployed the contract).
-2. Use **addNurse** to assign the NURSE_ROLE to any address from Remix’s pre-generated accounts.
-3. Use **addDoctor** to assign the DOCTOR_ROLE to another address.
-
-#### 2. Set Patient Data
-1. Still with the **admin** account selected, call **setPatientData** to initialize or update a patient’s records.
+> **Tip**:  Remix automatically selects the account used for transactions. If you switch to another address to act as a nurse or doctor, remember to switch back to the admin account for admin-only functions.
+ 
+### Add Nurses
+ 
+1. Using **admin** account (the one that deployed the contract).
+2. Use `addNurse` to assign the `NURSE_ROLE` to **Nuser1** address from Remix’s pre-generated accounts.
+3. In the Deployed Contracts section, find the `addNurse` function.
+4. Paste the **Nurse1** address into the `addNurse` input field and click the transact button.
+ 
+### Add Doctor
+1. Using **admin** account (the one that deployed the contract).
+2. Use `addDoctor` to assign the `DOCTOR_ROLE` to **Doctor1** address.
+3. In the Deployed Contracts section, find the `addDoctor` function.
+4. Paste the **Doctor1** address into the `addDoctor` input field and click the transact button.
+ 
+### Set Patient Data
+ 
+1. Still with the **admin** account selected, call `setPatientData` to initialize or update a patient’s records.
 2. Provide:
-   - `patientAddress` (an address from the Remix list),
-   - A blood pressure reading (e.g., `"120/80"`),
-   - Additional exam data (e.g., `"Normal"`).
-3. This automatically grants the `PATIENT_ROLE` to `patientAddress`.
-
-#### 3. Grant Permissions
-1. **grantNursePermission**:
-   - Input: `patientAddress`, `nurseAddress`
-   - Click **transact**.  
-   - This nurse can now read the patient’s `bloodPressure` data.
-2. **grantDoctorPermission**:
-   - Input: `patientAddress`, `doctorAddress`
-   - Click **transact**.  
-   - This doctor can now read the patient’s full record (`bloodPressure` and `otherExams`).
-
-#### 4. Access Patient Data
-1. **getBloodPressure** (as a nurse):
-   - Switch to (or select) the **nurse** account that has permission.
-   - Input: `patientAddress`, `nurseAddress`
-   - Click **call** to view the patient’s `bloodPressure`.
-2. **getAllPatientData** (as a doctor):
-   - Switch to (or select) the **doctor** account that has permission.
-   - Input: `patientAddress`, `doctorAddress`
-   - Click **call** to see both `bloodPressure` and `otherExams`.
-
-#### 5. Revoke Permissions
-1. **revokeNursePermission**:
-   - Switch to either the **admin** or the **patient** account.
-   - Input: `patientAddress`, `nurseAddress`.
-   - Click **transact** to remove the nurse’s permission.
-2. **revokeDoctorPermission**:
-   - Switch to either the **admin** or the **patient** account.
-   - Input: `patientAddress`, `doctorAddress`.
-   - Click **transact** to remove the doctor’s permission.
+- `patientAddress` (Patient1),
+- `bloodPressure reading` (e.g., "120/80"),
+- `otherExams` (e.g., "otherExams").
+3. In the Deployed Contracts section, find the `setPatientData` function.
+4. Paste the Patient1 address into the patientAddress input field, enter the blood pressure reading and additional medical exam data, then click the transact button.
+ 
+### grantNursePermission:
+1. In the Deployed Contracts section, find the `grantNursePermission` function.
+2. Paste the addresses into the respective input fields. Input: `patient1` address, `nurse1` address
+3. Click transact button.
+4. This nurse can now read the patient’s `bloodPressure` data.
+ 
+ 
+### grantDoctorPermission:
+1. In the Deployed Contracts section, find the `grantDoctorPermission` function.
+2. Paste the addresses into the respective input fields. Input: patient1 Address, doctor1 Address
+3. Click transact.
+4. This doctor can now read the patient’s full record (bloodPressure and otherExams).
+ 
+ 
+### getBloodPressure (as a nurse):
+1. In the Deployed Contracts section, find the `getBloodPressure` function.
+2. Past `Patient1` address and nurse1 address that has permission.
+3. Click transact.
+4. This nurse now have have access to **Patient1** `bloodPressure` data.
+ 
+### getAllPatientData (as a doctor):
+1. In the Deployed Contracts section, find the `getAllPatientData` function.
+2. Past `Patient1` address and `Doctor1` address that has permission.
+3. Click transact
+4. Now you can see both `bloodPressure` and `otherExams`.
+ 
+ 
+### revokeNursePermission:
+1. In the Deployed Contracts section, find the revokeNursePermission function.
+2. Past `patient1` Address, `nurse1` Address.
+3. Click transact to remove the nurse’s permission.
+ 
+### revokeDoctorPermission:
+1. In the Deployed Contracts section, find the revokeDoctorPermission function.
+2. past `patient` Address, `doctor1` Address.
+3. Click transact to remove the doctor’s permission.
 
 ---
 
